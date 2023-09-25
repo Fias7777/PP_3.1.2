@@ -6,16 +6,17 @@
     <title>Create</title>
 </head>
 <body>
-    <form th:method="POST" th:action="@{/users}" th:object="${user}">
-        <label for="name">enter name: </label>
-        <label for="lastName">enter last_name: </label>
-        <label for="age">enter age: </label>
-        <input type="text" th:field="*{name}" id="name">
-        <input type="text" th:field="*{lastName}" id="lastName">
-        <input type="number" th:field="*{age}" id="age">
+<form th:method="POST" th:action="@{/users}" th:object="${user}">
+    <label for="name">enter name: </label>
+    <label for="lastName">enter last_name: </label>
+    <label for="age">enter age: </label>
+    <input type="text" th:field="*{name}" id="name">
+    <input type="text" th:field="*{lastName}" id="lastName">
+    <input type="text" th:field="*{age}" id="age">
+    <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">0</div>
 
-        <input type="submit" value="create">
-    </form>
+    <input type="submit" value="create">
+</form>
 
 </body>
 </html>

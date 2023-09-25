@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dao.UserDao;
 import com.example.demo.model.User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -17,26 +18,31 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User create(User user) {
-        return userDao.save(user);
+    @Transactional
+    public void create(User user) {
+        userDao.save(user);
     }
 
     @Override
-    public User update(User user) {
-        return userDao.save(user);
+    @Transactional
+    public void update(User user) {
+        userDao.update(user);
     }
 
     @Override
-    public void deleteById(Long id) {
-        userDao.deleteById(id);
+    @Transactional
+    public void delete(Long id) {
+        userDao.delete(id);
     }
 
     @Override
+    @Transactional
     public User findById(Long id) {
-        return userDao.findById(id).orElseThrow(EntityNotFoundException::new);
+        return userDao.findById(id);
     }
 
     @Override
+    @Transactional
     public List<User> findAll() {
         return userDao.findAll();
     }

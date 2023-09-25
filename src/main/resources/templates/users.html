@@ -6,19 +6,38 @@
     <title>Users</title>
 </head>
 <body>
+<h1>List users</h1>
 <table>
-  <tr>
-    <th>Id</th>
-    <th>Name</th>
-    <th>LastName</th>
-    <th>Age</th>
-  </tr>
-  <tr th:each="user : ${users}">
-    <td th:text="${user.getId()}"></td>
-    <td th:text="${user.getName()}"></td>
-    <td th:text="${user.getLastName()}"></td>
-    <td th:text="${user.getAge()}"></td>
-  </tr>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>LastName</th>
+        <th>Age</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.getId()}"></td>
+        <td th:text="${user.getName()}"></td>
+        <td th:text="${user.getLastName()}"></td>
+        <td th:text="${user.getAge()}"></td>
+        <td>
+            <a th:href="@{'/users/' + ${user.getId()} + '/edit/'}">Edit</a>
+        </td>
+        <td>
+            <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
+                <input type="submit" class="link-button" value="Delete"/>
+            </form>
+        </td>
+    </tr>
 </table>
+<style>
+    .link-button {
+        background: none;
+        border: none;
+        color: blue;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+</style>
+<a href="/users/create" style="display: block; margin-top: 20px; font-size: 20px;">Create user</a>
 </body>
 </html>
