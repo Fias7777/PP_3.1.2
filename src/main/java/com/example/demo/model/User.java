@@ -1,8 +1,7 @@
 package com.example.demo.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 @Entity
@@ -13,16 +12,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name",nullable = false)
+    @Column(name = "name", nullable = false)
+    @NotEmpty(message = "Enter field name")
+    @Size(min = 2, max = 30, message = "Name should be between 2 to 30")
     private String name;
 
-    @Column(name = "last_name",nullable = false)
+    @Column(name = "last_name", nullable = false)
+    @NotEmpty(message = "Enter field last_name")
     private String lastName;
 
-
-    @Column(nullable = false)
-    @Min(value = 0, message = "Age should be >= 0")
-    @Max(value = 127, message = "Age should be < 128")
+    @Column(name = "age", nullable = false)
+    @NotNull(message = "Enter field age")
+    @Min(value = 10, message = "min 10")
+    @Max(value = 110, message = "max 110")
     private Integer age;
 
     public User() {

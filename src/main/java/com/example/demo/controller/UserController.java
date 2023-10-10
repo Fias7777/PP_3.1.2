@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -34,7 +35,8 @@ public class UserController {
     }
 
     @PostMapping
-    public String create(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+    @Validated
+    public String create(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/create";
         }
@@ -49,7 +51,7 @@ public class UserController {
     }
 
     @PutMapping
-    public String update(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+    public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/edit";
         }
